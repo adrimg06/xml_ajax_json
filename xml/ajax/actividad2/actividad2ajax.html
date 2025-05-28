@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio 2 - Información Meteorológica AEMET</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
+    h2 { color: #2c3e50; }
+    .weather-block { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); margin-bottom: 20px; }
+    .weather-table { width: 100%; border-collapse: collapse; margin-top: 1em; }
+    .weather-table th, .weather-table td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    .weather-table th { background: #e9e9e9; }
+  </style>
+</head>
+<body>
+  <h2>Información Meteorológica - Huelva</h2>
+  <div class="weather-block" id="weather"></div>
+
+  <script>
+    // Cambia el código INE aquí para otra localidad si lo deseas
+    const codigoINE = "21041"; // Huelva capital
+    const url = `actividad2ajax.xml`;
+
+    fetch(url)
+      .then(response => response.text())
+      .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+      .then(data => {
+        // Temperatura máxima y mínima
+        const prediccion = data.getElementsByTagName("prediccion")[0];
+        const dia = prediccion.getElementsByTagName("dia")[0];
+
+        const tempMax = dia.getElementsByTagName("temperatura")[0].getElementsByTagName("maxima")[0].textContent;
+        const tempMin = dia.getElementsByTagName("temperatura")[0].getElementsByTagName("minima")[0].textContent;
+
+        // Estado del cielo por tramo horario
+        const estados = dia.getElementsByTagName("estado_cielo");
+        let estadoCielo = "";
+        for (let i = 0; i < estados.length; i++) {
+          const periodo = estados[i].getAttribute("periodo") || "00-24";
+          const descripcion = estados[i].getAttribute("descripcion") || estados[i].textContent;
+          if (descripcion) {
+            estadoCielo += `<tr>
+              <td>${periodo}</td>
+              <td>${descripcion}</td>
+            </tr>`;
+          }
+        }
+
+        // Viento por tramo horario
+        const vientos = dia.getElementsByTagName("viento");
+        let vientoHTML = "";
+        for (let i = 0; i < vientos.length; i++) {
+          const periodo = vientos[i].getAttribute("periodo") || "00-24";
+          const direccion = vientos[i].getElementsByTagName("direccion")[0]?.textContent || "-";
+          const velocidad = vientos[i].getElementsByTagName("velocidad")[0]?.textContent || "-";
+          vientoHTML += `<tr>
+            <td>${periodo}</td>
+            <td>${direccion}</td>
+            <td>${velocidad} km/h</td>
+          </tr>`;
+        }
+
+        // Humedad relativa por tramo horario
+        const humedades = dia.getElementsByTagName("humedad_relativa");
+        let humedadHTML = "";
+        for (let i = 0; i < humedades.length; i++) {
+          const periodo = humedades[i].getAttribute("periodo") || "00-24";
+          const minima = humedades[i].getElementsByTagName("minima")[0]?.textContent || "-";
+          const maxima = humedades[i].getElementsByTagName("maxima")[0]?.textContent || "-";
+          humedadHTML += `<tr>
+            <td>${periodo}</td>
+            <td>${minima}%</td>
+            <td>${maxima}%</td>
+          </tr>`;
+        }
+
+        document.getElementById("weather").innerHTML = `
+          <strong>Temperatura máxima:</strong> ${tempMax}°C<br>
+          <strong>Temperatura mínima:</strong> ${tempMin}°C<br><br>
+
+          <strong>Estado del cielo por tramo horario:</strong>
+          <table class="weather-table">
+            <tr><th>Periodo</th><th>Estado</th></tr>
+            ${estadoCielo}
+          </table>
+          <br>
+          <strong>Viento por tramo horario:</strong>
+          <table class="weather-table">
+            <tr><th>Periodo</th><th>Dirección</th><th>Velocidad</th></tr>
+            ${vientoHTML}
+          </table>
+          <br>
+          <strong>Humedad relativa por tramo horario:</strong>
+          <table class="weather-table">
+            <tr><th>Periodo</th><th>Mínima</th><th>Máxima</th></tr>
+            ${humedadHTML}
+          </table>
+        `;
+      })
+      .catch(err => {
+        document.getElementById("weather").innerHTML = "No se pudo obtener la información meteorológica.";
+      });
+  </script>
+</body>
+</html>
