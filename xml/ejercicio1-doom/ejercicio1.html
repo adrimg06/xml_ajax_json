@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX Ejercicio 1 - Catálogo de CDs</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+    }
+    .question {
+      background-color: #fff;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    pre {
+      background-color: #eee;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .div-table {
+      display: table;
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1em;
+    }
+    .div-table-row {
+      display: table-row;
+    }
+    .div-table-head, .div-table-cell {
+      display: table-cell;
+      border: 1px solid #999;
+      padding: 8px;
+      text-align: left;
+    }
+    .div-table-head {
+      background: #f2f2f2;
+      font-weight: bold;
+    }
+    .div-table-row:nth-child(even) .div-table-cell {
+      background: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Preguntas XML Sencillas</h1>
+
+  <div class="question">
+    <h2>1. ¿Cómo se vería un elemento llamado <code>test element</code> con el contenido "This is our first element!"?</h2>
+    <pre>
+&lt;test_element&gt;This is our first element!&lt;/test_element&gt;
+    </pre>
+  </div>
+
+  <div class="question">
+    <h2>2. Muestra (en sintaxis XML) la jerarquía del elemento <code>book</code> con los subelementos <code>chapters</code> y <code>author</code>. <code>author</code> tiene a su vez los subelementos <code>name</code> y <code>address</code>.</h2>
+    <pre>
+&lt;book&gt;
+  &lt;chapters&gt;
+    &lt;!-- contenido del capítulo aquí --&gt;
+  &lt;/chapters&gt;
+  &lt;author&gt;
+    &lt;name&gt;Nombre del Autor&lt;/name&gt;
+    &lt;address&gt;Dirección del Autor&lt;/address&gt;
+  &lt;/author&gt;
+&lt;/book&gt;
+    </pre>
+  </div>
+
+  <div class="question">
+    <h2>3. ¿Cómo se vería un elemento llamado <code>entry</code> que tiene 2 atributos: <code>no</code> con el valor 24 y <code>date</code> con el valor 27.10.2004?</h2>
+    <pre>
+&lt;entry no="24" date="27.10.2004" /&gt;
+    </pre>
+  </div>
+
+  <h2>Catálogo de CDs (País, Compañía, Precio, Año)</h2>
+  <div class="div-table" id="cdTable">
+    <div class="div-table-row">
+      <div class="div-table-head">País</div>
+      <div class="div-table-head">Compañía</div>
+      <div class="div-table-head">Precio</div>
+      <div class="div-table-head">Año</div>
+    </div>
+  </div>
+
+  <script>
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+      const xmlDoc = this.responseXML;
+      const cds = xmlDoc.getElementsByTagName("CD");
+      let table = document.getElementById("cdTable");
+      for (let i = 0; i < cds.length; i++) {
+        let country = cds[i].getElementsByTagName("COUNTRY")[0].textContent;
+        let company = cds[i].getElementsByTagName("COMPANY")[0].textContent;
+        let price = cds[i].getElementsByTagName("PRICE")[0].textContent;
+        let year = cds[i].getElementsByTagName("YEAR")[0].textContent;
+        let row = document.createElement("div");
+        row.className = "div-table-row";
+        row.innerHTML = `
+          <div class="div-table-cell">${country}</div>
+          <div class="div-table-cell">${company}</div>
+          <div class="div-table-cell">${price}€</div>
+          <div class="div-table-cell">${year}</div>
+        `;
+        table.appendChild(row);
+      }
+    }
+    xhttp.open("GET", "https://www.w3schools.com/js/cd_catalog.xml");
+    xhttp.send();
+  </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title> Lector XML de Libros</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    button {
+      margin: 4px;
+      padding: 6px 12px;
+      background-color: #2d89ef;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1b5dbf;
+    }
+    table {
+      border-collapse: collapse;
+      margin-top: 15px;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 6px 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #ddd;
+    }
+    fieldset {
+      border: 1px solid #aaa;
+      padding: 10px;
+      background-color: #fff;
+    }
+    #output {
+      margin-top: 20px;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📖 Lector de Archivo books.xml</h1>
+
+  <fieldset>
+    <legend><strong>Funciones disponibles</strong></legend>
+    <button onclick="mostrarTitulo1()">1. Título del primer libro</button>
+    <button onclick="mostrarTodosTitulos()">2. Todos los títulos</button>
+    <button onclick="mostrarNumAtributosLibro4()">3. Nº atributos del cuarto libro</button>
+    <button onclick="mostrarValoresAtributosLibro4()">4. Valores atributos libro 4</button>
+    <button onclick="mostrarNumAutoresLibro3()">5. Nº autores del tercer libro</button>
+    <button onclick="mostrarAutoresLibro3()">6. Autores del tercer libro</button>
+    <button onclick="mostrarTabla()">7. Mostrar tabla</button>
+  </fieldset>
+
+  <div id="output"></div>
+
+  <!-- Cargar el script -->
+  <script src="lectorXML.js"></script>
+
+  <footer>
+    &copy; 2025 Proyecto XML con JavaScript
+  </footer>
+
+</body>
+</html>

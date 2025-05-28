@@ -1,0 +1,33 @@
+<library>
+
+  <book category="gastronomy" format="hardcover">
+    <title lang="en">Italian Flavors</title>
+    <author>Gianna Rossi</author>
+    <year>2006</year>
+    <price>31.50</price>
+  </book>
+
+  <book category="fantasy">
+    <title lang="en">The Wizard's Legacy</title>
+    <author>J. L. Morgan</author>
+    <year>2007</year>
+    <price>27.45</price>
+  </book>
+
+  <book category="technology" language="en">
+    <title lang="en">Mastering XML</title>
+    <author>Ana Smith</author>
+    <author>Carl Thompson</author>
+    <author>Lisa McGregor</author>
+    <year>2010</year>
+    <price>45.00</price>
+  </book>
+
+  <book category="history" cover="soft">
+    <title lang="es">Descubriendo Europa</title>
+    <author>Marcos Vidal</author>
+    <year>2012</year>
+    <price>36.20</price>
+  </book>
+
+</library>
