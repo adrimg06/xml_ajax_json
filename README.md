@@ -13,12 +13,16 @@ Ejercicio | Descripcion
 [Ejecicio7](xml/xml/actividad7.html ) | ---
 
 DOOM
+Ejercicio | Descripcion
+----------|------------
 [Ejercicio1](xml/actividad2-doom/ejercicio2.html) | ---
 [Ejercicio2](xml/actividad2-doom/ejercicio2.html) | ---
 [Ejecicio3](xml/ejercicio3-doom-xml/ejercicio3.html) | ---
 
 AJAX
 
+Ejercicio | Descripcion
+----------|------------
 [Ejecicio1](xml/ajax/actividad1/actividad1ajax.html) | ---
 [Ejercicio2](xml/ajax/actividad2/actividad2ajax.html) | ---
 [Ejecicio3](xml/ajax/actividad3/actividad3jason.html) | ---
