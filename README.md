@@ -15,7 +15,7 @@ Ejercicio | Descripcion
 DOOM
 Ejercicio | Descripcion
 ----------|------------
-[Ejercicio1](xml/actividad2-doom/ejercicio2.html) | ---
+[Ejercicio1](xml/actividad1-doom/ejercicio1.html) | ---
 [Ejercicio2](xml/actividad2-doom/ejercicio2.html) | ---
 [Ejecicio3](xml/ejercicio3-doom-xml/ejercicio3.html) | ---
 
